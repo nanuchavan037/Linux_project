@@ -96,3 +96,42 @@ To send a test email from the command line using Mailutils, use the mail command
 echo "This is a test email" | mail -s "Test Subject" recipient@example.com
 ```
 That's it! You've successfully configured SMTP on your localhost using Postfix and Mailutils. You can now send emails from your Linux server.
+
+# 2) Creating a user in localhost, which should not be able to execute the sudo command.
+
+To create a user on your localhost who cannot execute the sudo command, you'll need to perform the following steps. Please note that you should have administrative privileges to create a new user or modify user permissions.
+
+  1.  Open a terminal on your localhost.
+
+  2.  Use the adduser or useradd command to create a new user. Replace <username> with the desired username:
+    
+```bash
+sudo adduser <username>
+```
+For example, to create a user named "john":
+
+```bash
+
+sudo adduser john
+```
+3. Follow the prompts to set the user's password and provide additional information as needed.
+
+4. By default, on many Linux distributions, a newly created user is not added to the sudo group and cannot execute sudo commands. You can double-check this by running:
+
+```bash
+
+groups <username>
+```
+
+Replace <username> with the actual username. The output should not include the sudo group.
+
+5. Now, try to execute a sudo command with the newly created user:
+
+```bash
+
+    sudo any_command
+```
+
+    You should receive an error message indicating that the user is not in the sudoers file. This confirms that the user cannot execute sudo commands.
+
+Your new user has been created without sudo privileges, meaning they cannot execute administrative commands using sudo.

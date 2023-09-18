@@ -14,7 +14,7 @@ sudo apt-get update   # For Debian/Ubuntu
 sudo yum update       # For CentOS.
 ```
 
-# Step 2: Install Postfix and Mailutils
+##Step 2: Install Postfix and Mailutils
 
 Install Postfix and Mailutils by running the following command:
 
@@ -25,7 +25,9 @@ sudo apt-get install postfix mailutils   # For Debian/Ubuntu
 sudo yum install postfix mailutils       # For CentOS
 ```
 During the installation, you'll be prompted to select a mail configuration type. Choose "Internet Site" if you're configuring Postfix for your own domain or for general use. Follow the prompts to complete the installation. You will be asked to provide your system's mail name (e.g., example.com).
-Step 3: Configure Postfix
+
+
+## Step 3: Configure Postfix
 
 The primary Postfix configuration file is located at /etc/postfix/main.cf. Use a text editor to open it:
 
@@ -34,8 +36,8 @@ The primary Postfix configuration file is located at /etc/postfix/main.cf. Use a
 sudo nano /etc/postfix/main.cf
 ```
 Add the following lines to the main.cf file:
+```bash
 
-plaintext
 
 relayhost = [smtp.gmail.com]:587
 myhostname = your_hostname
@@ -49,15 +51,15 @@ smtp_tls_security_level = encrypt
 
 # Disallow methods that allow anonymous authentication
 smtp_sasl_security_options = noanonymous
+```
+## Step 4: Create SASL Password File
 
-Step 4: Create SASL Password File
-
-Create a file under /etc/postfix/sasl/ with the filename sasl_passwd. Add the following line to this file, replacing email@gmail.com with your Gmail email address and password with your Gmail password:
-
-plaintext
+Create a file under /etc/postfix/sasl/ with the filename sasl_passwd. 
+Add the following line to this file, replacing email@gmail.com with your Gmail email address and password with your Gmail password:
+```bash
 
 [smtp.gmail.com]:587 email@gmail.com:password
-
+```
 Step 5: Start/Stop Postfix
 
 To start Postfix, use the following command:
@@ -65,31 +67,31 @@ To start Postfix, use the following command:
 ```bash
 
 sudo systemctl start postfix
-
+```
 To restart Postfix, use:
 
 ```bash
 
 sudo systemctl restart postfix
-
+```
 To stop Postfix, use:
 
 ```bash
 
 sudo systemctl stop postfix
-
+```
 Ensure that Postfix is enabled to start at boot:
 
 ```bash
 
 sudo systemctl enable postfix
-
-Step 6: Send a Test Email
+```
+## Step 6: Send a Test Email
 
 To send a test email from the command line using Mailutils, use the mail command. Replace recipient@example.com with the recipient's email address:
 
 ```bash
 
 echo "This is a test email" | mail -s "Test Subject" recipient@example.com
-
+```
 That's it! You've successfully configured SMTP on your localhost using Postfix and Mailutils. You can now send emails from your Linux server.

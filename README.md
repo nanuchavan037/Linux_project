@@ -135,3 +135,126 @@ Replace <username> with the actual username. The output should not include the s
     You should receive an error message indicating that the user is not in the sudoers file. This confirms that the user cannot execute sudo commands.
 
 Your new user has been created without sudo privileges, meaning they cannot execute administrative commands using sudo.
+
+
+# 3) Configure your system in such a way that when a user type and executes a describe command from anywhere of the system it must list all the files and folders of the user's current directory.
+
+
+1) Open terminal on your localhost
+2) Type the following command
+
+ ```bash
+
+ alias describe="ls -l"
+
+```
+Now describe will work as ls and list all the files and folders present inside that directory
+
+
+# 4) Users can put a compressed file at any path of the linux file system. The name of the file will be research and the extension will be of compression type, example for gzip type extension will be .gz.
+
+1) Open your terminal on localhost
+2) Use following command to find and decompressed the compressed file
+   
+ ```bash
+    find / -name "research.gz" -exec gunzip {} \; 
+```
+
+
+# 5) Configure your system in such a way that any user of your system creates a file then there should not be permission to do any activity in that file.
+
+ Open a terminal on your system.
+
+To restrict all permissions for others, set the umask value to 077. You can do this by adding the following line to your shell profile file (e.g., ~/.bashrc, ~/.bash_profile, ~/.zshrc, etc.):
+
+```bash
+
+umask 077
+```
+This setting will ensure that when any user creates a file, the default permissions for others will be restricted, and they won't have any access to the file.
+
+Save the changes and either log out and back in or run the following command to apply the new umask setting immediately:
+
+```bash
+
+    source ~/.bashrc  # or the appropriate profile file
+```
+Now, when any user creates a new file, it will have permissions that prevent others from accessing it in any way.
+
+For example, if a user creates a file using the touch command:
+
+```bash
+
+touch myfile.txt
+```
+The permissions for myfile.txt will be such that only the file owner (the user who created it) will have read and write access, while all others will have no permissions:
+
+```bash
+
+-rw------- 1 username username 0 Sep 18 15:30 myfile.txt
+```
+Please note that while this restricts others from accessing the file, the file owner can still modify its permissions if needed.
+
+
+# Create a service with the name showtime , after starting the service, every minute it should print the current time in a file in the user home directory.
+
+To create a systemd service named "showtime" that prints the current time to a file in the user's home directory every minute, follow these steps:
+
+  1)  Create a Bash script that prints the current time and saves it to a file.
+Let's call this script showtime.sh. Replace <username> with the actual username for whom you want to create this service:
+
+
+```bash
+#!/bin/bash
+while true; do
+    date | awk '{print $4}'  >> "$HOME/showtime.txt"
+    sleep 60  # Sleep for 60 seconds (1 minute)
+done
+
+```
+
+2) Save this script in a location where the user has write access (e.g., /home/<username>/showtime.sh) and make it executable:
+
+```bash
+chmod +x /home/<username>/showtime.sh
+
+```
+3) Create a systemd service unit file for "showtime." You can create a new file, such as /etc/systemd/system/showtime.service, and add the following content to it:
+
+
+```bash
+[Unit]
+Description=Showtime Service
+
+[Service]
+Type=simple
+ExecStart=/home/<username>/showtime.sh
+User=<username>
+Group=<username>
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+```
+Replace <username> with the actual username.
+
+4) Reload the systemd manager configuration to update the available services:
+
+```bash
+sudo systemctl daemon-reload
+
+```
+5) Enable the "showtime" service to start on boot:
+
+```bash
+sudo systemctl enable showtime.service
+
+```
+6) Start the "showtime" service:
+
+```bash
+
+    sudo systemctl start showtime.service
+```
+The "showtime" service is now running and will print the current time to the showtime.txt file in the user's home directory every minute. You can check the output in /home/<username>/showtime.txt.

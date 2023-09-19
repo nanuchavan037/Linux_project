@@ -206,8 +206,6 @@ Please note that while this restricts others from accessing the file, the file o
 To create a systemd service named "showtime" that prints the current time to a file in the user's home directory every minute, follow these steps:
 
   1)  Create a Bash script that prints the current time and saves it to a file.
-Let's call this script showtime.sh. Replace <username> with the actual username for whom you want to create this service:
-
 
 ```bash
 #!/bin/bash
@@ -218,7 +216,7 @@ done
 
 ```
 
-2) Save this script in a location where the user has write access (e.g., /home/<username>/showtime.sh) and make it executable:
+2) Save this script in a location where the user has write access (e.g., /home/showtime.sh) and make it executable:
 
 ```bash
 chmod +x /home/<username>/showtime.sh
@@ -233,9 +231,8 @@ Description=Showtime Service
 
 [Service]
 Type=simple
-ExecStart=/home/<username>/showtime.sh
+ExecStart=/home/showtime.sh
 User=<username>
-Group=<username>
 Restart=always
 
 [Install]

@@ -170,7 +170,7 @@ Now describe will work as ls and list all the files and folders present inside t
 
  Open a terminal on your system.
 
-To restrict all permissions for others, set the umask value to 077. You can do this by adding the following line to your shell profile file (e.g., ~/.bashrc, ~/.bash_profile, ~/.zshrc, etc.):
+To restrict all permissions for others, set the umask value to 0777 into your shell file (.bashrc)
 
 ```bash
 
@@ -196,7 +196,7 @@ The permissions for myfile.txt will be such that only the file owner (the user w
 
 ```bash
 
--rw------- 1 username username 0 Sep 18 15:30 myfile.txt
+------- 1 username username 0 Sep 18 15:30 myfile.txt
 ```
 Please note that while this restricts others from accessing the file, the file owner can still modify its permissions if needed.
 

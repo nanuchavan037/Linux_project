@@ -142,6 +142,8 @@ Your new user has been created without sudo privileges, meaning they cannot exec
 
 1) Open terminal on your localhost
 2) Type the following command
+3) Open /etc/.bashrc
+4)  Add following line inside the .bashrc script
 
  ```bash
 

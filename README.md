@@ -61,7 +61,7 @@ Add the following line to this file, replacing email@gmail.com with your Gmail e
 
 [smtp.gmail.com]:587 email@gmail.com:password
 ```
-Step 5: Start/Stop Postfix
+## Step 5: Start/Stop Postfix
 
 To start Postfix, use the following command:
 

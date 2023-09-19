@@ -15,7 +15,7 @@ sudo apt-get update   # For Debian/Ubuntu
 sudo yum update       # For CentOS.
 ```
 
-##Step 2: Install Postfix and Mailutils
+## Step 2: Install Postfix and Mailutils
 
 Install Postfix and Mailutils by running the following command:
 

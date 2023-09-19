@@ -201,7 +201,7 @@ The permissions for myfile.txt will be such that only the file owner (the user w
 Please note that while this restricts others from accessing the file, the file owner can still modify its permissions if needed.
 
 
-# Create a service with the name showtime , after starting the service, every minute it should print the current time in a file in the user home directory.
+# 6) Create a service with the name showtime , after starting the service, every minute it should print the current time in a file in the user home directory.
 
 To create a systemd service named "showtime" that prints the current time to a file in the user's home directory every minute, follow these steps:
 

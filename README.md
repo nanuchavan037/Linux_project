@@ -150,7 +150,7 @@ Your new user has been created without sudo privileges, meaning they cannot exec
 
  ```bash
 
- alias describe="ls -l"
+ alias describe='ls -l'
 
 ```
 Now describe will work as ls and list all the files and folders present inside that directory
